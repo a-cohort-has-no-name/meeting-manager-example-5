@@ -3,8 +3,11 @@
   <h1><a href="/meetings">All meetings</a></h1>
 
   <div>
-    Search by name:<input v-model="nameFilter">
+    Search by name:<input v-model="nameFilter" list="names">
   </div>
+  <datalist id="names">
+    <option v-for="meeting in meetings">{{ meeting.name }}</option>
+  </datalist>
 
   <div v-for="meeting in filteredMeetings">
     <h3><a v-bind:href="'/meetings/' + meeting.id">{{ meeting.name }}</a></h3>
