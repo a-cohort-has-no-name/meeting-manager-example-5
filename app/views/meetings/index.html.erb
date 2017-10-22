@@ -9,6 +9,14 @@
     <option v-for="meeting in meetings">{{ meeting.name }}</option>
   </datalist>
 
+  <div>
+    <button v-on:click="changeOrderAttribute('startTime')">Sort by start time</button>
+  </div>
+  <div>Filter by tag:
+  <button v-for="tag in tags" v-on:click="filterByTag(tag)">{{ tag.name }}</button>
+  <button v-on:click="resetTagFilter()">Reset tag filter</button>
+  </div>
+
   <div v-for="meeting in filteredMeetings">
     <h3><a v-bind:href="'/meetings/' + meeting.id">{{ meeting.name }}</a></h3>
     <p>
@@ -16,8 +24,8 @@
       <a v-for="tag in meeting.tags" v-bind:href="'/meetings?tag=' + tag.name"> {{ tag.name }}</a>
     </p>
     <p>Address: {{ meeting.address }}</p>
-    <p>Start time: {{ meeting.start_time }}</p>
-    <p>End time: {{ meeting.end_time }}</p>
+    <p>Start time: {{ meeting.startTime }}</p>
+    <p>End time: {{ meeting.endTime }}</p>
   </div>
 
 </div>
