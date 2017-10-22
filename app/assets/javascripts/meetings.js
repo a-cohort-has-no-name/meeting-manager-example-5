@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var app = new Vue({
     el: '#app',
     data: {
-      meetings: []
+      meetings: [],
+      nameFilter: ''
     },
     mounted: function() {
       $.get('/api/v1/meetings.json', function(result) {
@@ -14,7 +15,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     },
     computed: {
-
+      filteredMeetings: function() {
+        return this.meetings.filter(function(meeting) {
+          //if nameFilter is in meeting.name
+          return meeting.name.toLowerCase().indexOf(this.nameFilter.toLowerCase()) !== -1;
+        }.bind(this));
+      }
     }
   });
 });
